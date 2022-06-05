@@ -26,12 +26,9 @@ def validate_user(confluence, admin):
     :return:
     """
     try:
-        print(admin)
         confluence.get_user_details_by_username(admin)
-        print("hi")
         return True
     except:
-        print("Failed")
         return False
 
 
@@ -58,7 +55,6 @@ def start_creation(host, confluence, space_name, space_key, space_admin):
         return False, "The Admin You Entered Does Not Exist"
 
     try:
-        print("space key: " + space_key)
         confluence.create_space(space_key=space_key, space_name=space_name)
         linked = f"{host}/display/{space_key}/{space_name.replace(' ','+')}+Home"
 
@@ -105,14 +101,12 @@ def set_admin(host, access_token, admin, key):
         "Content-Type": "application/json",
         "Authorization": f"Bearer {access_token}"
     }
-    print("here!!!!!")
     response = requests.request(
         "POST",
         url,
         data=requestArray,
         headers=headers
     )
-    print(response)
 
     return response
 
